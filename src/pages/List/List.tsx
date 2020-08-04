@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-interface Image {
+export interface Image {
   fields: {
     file: {
       url: string;
@@ -38,7 +38,7 @@ interface Image {
   };
 }
 
-interface Game {
+export interface Game {
   fields: {
     name: string;
     steps: Array<string>;
@@ -51,7 +51,7 @@ interface Game {
   };
 }
 
-interface GameWithoutImage {
+export interface GameWithoutImage {
   fields: {
     name: string;
     steps: Array<string>;
@@ -63,7 +63,7 @@ interface GameWithoutImage {
   };
 }
 
-interface Resp {
+export interface Resp {
   data: { items: GameWithoutImage[]; includes: { Asset: Image[] } };
 }
 
