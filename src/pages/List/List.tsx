@@ -1,6 +1,31 @@
 import React from "react";
 import axios from "axios";
 import { apiConfig } from "../../utils/apiConfig";
+import { makeStyles } from "@material-ui/core/styles";
+import {
+  CardActionArea,
+  CardContent,
+  CardMedia,
+  Card,
+  Grid,
+  Container,
+  Typography,
+} from "@material-ui/core";
+
+const useStyles = makeStyles((theme) => ({
+  cardGrid: {
+    paddingTop: theme.spacing(8),
+    paddingBottom: theme.spacing(8),
+  },
+  card: {
+    height: "100%",
+    display: "flex",
+    flexDirection: "column",
+  },
+  cardContent: {
+    flexGrow: 1,
+  },
+}));
 
 interface Image {
   fields: {
@@ -72,7 +97,9 @@ const addImagesToGames = (resp: Resp): Game[] => {
 };
 
 const List = () => {
+  const classes = useStyles();
   const [games, setGames] = React.useState<(Game | null)[]>([]);
+
   React.useEffect(() => {
     axios
       .get(
@@ -87,16 +114,29 @@ const List = () => {
   }, []);
 
   return (
-    <p>
-      {games.length > 0 &&
-        games.map((game) => (
-          <>
-            <img src={game?.fields.thumbnail.url} alt="game thumbnail" />
-            <p>Name: {game?.fields.name}</p>
-            <p>Steps: {game?.fields.steps}</p>
-          </>
-        ))}
-    </p>
+    <Container className={classes.cardGrid} maxWidth="md">
+      <Grid container spacing={8}>
+        {games.length > 0 &&
+          games.map((game) => (
+            <Grid item key={game!.fields.name} xs={12} sm={6} md={6}>
+              <Card className={classes.card}>
+                <CardActionArea onClick={() => console.log("clicked")}>
+                  <CardMedia
+                    component="img"
+                    image={game!.fields.thumbnail.url}
+                    title={game!.fields.name}
+                  />
+                  <CardContent className={classes.cardContent}>
+                    <Typography gutterBottom variant="h5" component="h2">
+                      {game!.fields.name}
+                    </Typography>
+                  </CardContent>
+                </CardActionArea>
+              </Card>
+            </Grid>
+          ))}
+      </Grid>
+    </Container>
   );
 };
 
