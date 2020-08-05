@@ -1,5 +1,7 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
+import { Game } from "../../types";
+import { Link } from "react-router-dom";
 import {
   CardActionArea,
   CardContent,
@@ -9,8 +11,6 @@ import {
   Container,
   Typography,
 } from "@material-ui/core";
-import { Game } from "../../types";
-import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   cardGrid: {
@@ -52,7 +52,7 @@ const List: React.FC<Props> = ({ games }) => {
                       title={game!.fields.name}
                     />
                     <CardContent className={classes.cardContent}>
-                      <Typography gutterBottom variant="h5" component="h2">
+                      <Typography variant="h5" component="h2">
                         {game!.fields.name}
                       </Typography>
                     </CardContent>
