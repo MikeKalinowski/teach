@@ -1,25 +1,22 @@
 import React from "react";
-import { render, screen, waitFor } from "@testing-library/react";
-import axios from "axios";
+import { render } from "@testing-library/react";
+import { Router } from "react-router-dom";
+import { createMemoryHistory } from "history";
+import { mockedGames } from "../../utils/testUtils";
 import List from "./List";
-import { mockedResponse } from "../../utils/testUtils";
-
-jest.mock("axios");
-const mockedAxios = axios as jest.Mocked<typeof axios>;
-
-mockedAxios.get.mockImplementationOnce(() => Promise.resolve(mockedResponse));
 
 test("renders List of games", async () => {
-  const { getByText } = render(<List />);
+  const history = createMemoryHistory();
+  const { getByText, queryByText } = render(
+    <Router history={history}>
+      <List games={mockedGames} />
+    </Router>
+  );
 
-  expect(mockedAxios.get).toHaveBeenCalledTimes(1);
-  await waitFor(() => {
-    getByText("Star Wars");
-  });
-  const gameStarWars = screen.getByText("Star Wars");
+  const gameStarWars = getByText("Star Wars");
   expect(gameStarWars).toBeInTheDocument();
-  const gameSpiritIsland = screen.getByText("Spirit Island");
+  const gameSpiritIsland = getByText("Spirit Island");
   expect(gameSpiritIsland).toBeInTheDocument();
-  const gameCatan = screen.queryByText("Catan");
+  const gameCatan = queryByText("Catan");
   expect(gameCatan).toBeNull();
 });

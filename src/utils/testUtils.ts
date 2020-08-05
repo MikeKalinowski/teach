@@ -1,6 +1,6 @@
-import { GameWithoutImage, Image, Resp } from "../pages/List/List";
+import { GameWithoutImage, Image, Resp } from "../types";
 
-export const mockedGames: GameWithoutImage[] = [
+export const mockedGamesWithoutImages: GameWithoutImage[] = [
   {
     fields: {
       name: "Star Wars",
@@ -48,7 +48,17 @@ export const mockedImages: Image[] = [
 ];
 export const mockedResponse: Resp = {
   data: {
-    items: mockedGames,
+    items: mockedGamesWithoutImages,
     includes: { Asset: mockedImages },
   },
 };
+
+export const mockedGames = mockedGamesWithoutImages.map((game) => {
+  return {
+    ...game,
+    fields: {
+      ...game.fields,
+      thumbnail: { ...game.fields.thumbnail, url: "some url" },
+    },
+  };
+});
