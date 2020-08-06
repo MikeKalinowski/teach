@@ -19,6 +19,7 @@ export interface Game {
         id: string;
       };
     };
+    notes: string;
   };
 }
 
@@ -31,6 +32,7 @@ export interface GameWithoutImage {
         id: string;
       };
     };
+    notes: string;
   };
 }
 

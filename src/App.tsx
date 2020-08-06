@@ -11,6 +11,7 @@ import GameComp from "./pages/GameComp";
 
 const useStyles = makeStyles(() => ({
   wrapper: {
+    padding: "0px 24px",
     backgroundColor: "#282c34",
     minHeight: "100vh",
     display: "flex",

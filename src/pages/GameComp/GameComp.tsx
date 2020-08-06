@@ -11,25 +11,31 @@ const GameComp: React.FC<Props> = ({ games }) => {
   let { name } = useParams();
   const parsedName = name.split(".").join(" ");
   const selectedGame = games?.find((game) => game?.fields.name === parsedName);
+  console.log(selectedGame?.fields.notes);
 
   return selectedGame ? (
     <Container maxWidth="md">
       <Box pb={6}>
         <Typography variant="h2">{selectedGame.fields.name}</Typography>
       </Box>
-      <div>
-        <Box pb={1}>
-          <Typography variant="h4">STEPS:</Typography>
-        </Box>
-        {selectedGame.fields.steps.map((step, i) => (
-          <Typography key={step} gutterBottom variant="body1">
-            {`${i + 1}. ${step}`}
-          </Typography>
-        ))}
-      </div>
+      <Box pb={1}>
+        <Typography variant="h4">STEPS:</Typography>
+      </Box>
+      {selectedGame.fields.steps.map((step, i) => (
+        <Typography key={step} gutterBottom variant="body1">
+          {`${i + 1}. ${step}`}
+        </Typography>
+      ))}
       <Box pt={6} pb={1}>
         <Typography variant="h4">NOTES:</Typography>
       </Box>
+      <Typography
+        gutterBottom
+        variant="body1"
+        style={{ whiteSpace: "pre-line" }}
+      >
+        {selectedGame.fields.notes}
+      </Typography>
       <Box pt={8}>
         <Link to={`/`}>
           <Button variant="contained">Back to list</Button>

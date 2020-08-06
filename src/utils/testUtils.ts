@@ -10,6 +10,7 @@ export const mockedGamesWithoutImages: GameWithoutImage[] = [
           id: "Star Wars",
         },
       },
+      notes: "These are some notes",
     },
   },
   {
@@ -21,6 +22,7 @@ export const mockedGamesWithoutImages: GameWithoutImage[] = [
           id: "Spirit Island",
         },
       },
+      notes: "These are some notes2",
     },
   },
 ];

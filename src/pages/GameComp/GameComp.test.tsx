@@ -19,8 +19,10 @@ test("Renders Game", () => {
   );
   const title = getByText("Star Wars"); // = game.fields.name
   expect(title).toBeInTheDocument();
-  const stepOne = getByText("1. one"); // = game.fields.name
+  const stepOne = getByText("1. one"); // = game.fields.steps
   expect(stepOne).toBeInTheDocument();
-  const stepTwo = getByText("2. two"); // = game.fields.name
+  const stepTwo = getByText("2. two"); // = game.fields.steps
   expect(stepTwo).toBeInTheDocument();
+  const notes = getByText("These are some notes"); // = game.fields.notes
+  expect(notes).toBeInTheDocument();
 });
