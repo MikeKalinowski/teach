@@ -31,6 +31,9 @@ interface Props {
   games: (Game | null)[];
 }
 
+const sortGames = (a: Game, b: Game) =>
+  a.fields.name > b.fields.name ? 1 : b.fields.name > a.fields.name ? -1 : 0;
+
 const List: React.FC<Props> = ({ games }) => {
   const classes = useStyles();
 
@@ -38,8 +41,8 @@ const List: React.FC<Props> = ({ games }) => {
     <Container className={classes.cardGrid} maxWidth="md">
       <Grid container spacing={8}>
         {games?.length > 0 &&
-          games.map((game) => (
-            <Grid item key={game!.fields.name} xs={12} sm={6} md={6}>
+          (games as Game[]).sort(sortGames).map((game) => (
+            <Grid item key={game.fields.name} xs={12} sm={6} md={6}>
               <Card className={classes.card}>
                 <CardActionArea>
                   <Link
@@ -48,12 +51,12 @@ const List: React.FC<Props> = ({ games }) => {
                   >
                     <CardMedia
                       component="img"
-                      image={game!.fields.thumbnail.url}
-                      title={game!.fields.name}
+                      image={game.fields.thumbnail.url}
+                      title={game.fields.name}
                     />
                     <CardContent className={classes.cardContent}>
                       <Typography variant="h5" component="h2">
-                        {game!.fields.name}
+                        {game.fields.name}
                       </Typography>
                     </CardContent>
                   </Link>

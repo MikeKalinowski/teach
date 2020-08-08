@@ -26,16 +26,20 @@ const GameComp: React.FC<Props> = ({ games }) => {
           {`${i + 1}. ${step}`}
         </Typography>
       ))}
-      <Box pt={6} pb={1}>
-        <Typography variant="h4">NOTES:</Typography>
-      </Box>
-      <Typography
-        gutterBottom
-        variant="body1"
-        style={{ whiteSpace: "pre-line" }}
-      >
-        {selectedGame.fields.notes}
-      </Typography>
+      {selectedGame.fields.notes && (
+        <>
+          <Box pt={6} pb={1}>
+            <Typography variant="h4">NOTES:</Typography>
+          </Box>
+          <Typography
+            gutterBottom
+            variant="body1"
+            style={{ whiteSpace: "pre-line" }}
+          >
+            {selectedGame.fields.notes}
+          </Typography>
+        </>
+      )}
       <Box pt={8}>
         <Link to={`/`}>
           <Button variant="contained">Back to list</Button>
