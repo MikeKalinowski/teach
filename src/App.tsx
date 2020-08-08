@@ -41,7 +41,7 @@ function App() {
 
   return (
     <div className={classes.wrapper}>
-      <Router>
+      <Router basename="/teach">
         <Switch>
           <Route exact path="/">
             <List games={games} />
